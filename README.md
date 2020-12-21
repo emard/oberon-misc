@@ -10,8 +10,8 @@ Oberon needs source files with CR line ending, here's shell script
 that does the conversion:
 
     cd oberon_tetris
-    ../convert.sh RandomNumbers.Mod.txt RandomNumbers.Mod
-    ../convert.sh ObTris.Mod.txt ObTris.Mod
+    ../txt2ob.sh RandomNumbers.Mod.txt RandomNumbers.Mod
+    ../txt2ob.sh ObTris.Mod.txt ObTris.Mod
 
 On oberon, middle click to "PCLink1.Run" to start file transfer service.
 Some LEDs should turn ON during upload and text printed "receiving ObTris.Mod done"
