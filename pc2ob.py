@@ -24,6 +24,7 @@ if response[0]==16:
       print(".",end="")
       sys.stdout.flush() # make "." appear immediately
     else:
+      print("")
       print("blk",len(buf),"error")
       break
     remain-=len(buf)
