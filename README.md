@@ -9,29 +9,42 @@ Here is example source: a tetris game by Ralf Denger, adapted by jr.
 Oberon needs source files with CR line ending, here's shell script
 that does the conversion:
 
-    ./convert.sh oberon_tetris/RandomNumbers.Mod.txt oberon_tetris/RandomNumbers.Mod
-    ./convert.sh oberon_tetris/ObTris.Mod.txt oberon_tetris/ObTris.Mod
+    cd oberon_tetris
+    ../convert.sh RandomNumbers.Mod.txt RandomNumbers.Mod
+    ../convert.sh ObTris.Mod.txt ObTris.Mod
 
 On oberon, middle click to "PCLink1.Run" to start file transfer service.
-On PC, when uploading dots will be printed for each 255 byte block
-and on oberon LEDs should turn ON during upload and finally some text
-printed "uploading filename done"
+Some LEDs should turn ON during upload and text printed "receiving ObTris.Mod done"
 
-    ./pc2ob.sh oberon_tetris/RandomNumbers.Mod /dev/ttyUSB0
-    ./pc2ob.sh oberon_tetris/ObTris.Mod /dev/ttyUSB0
+    ../pc2ob.py RandomNumbers.Mod /dev/ttyUSB0
+    hdr ok
+    ....
+    upload ok
 
-On oberon, check are files there by typing this and middle clicking to
+    ../pc2ob.py ObTris.Mod /dev/ttyUSB0
+    hdr ok
+    .....................................................................................
+    upload ok
+
+On oberon, check files by typing this and middle clicking to
 "System.Directory":
 
     System.Directory *.Mod
 
-Let's compile upload sources. 
-On oberon commaand window, type this and then middle click "ORP.Compile"
+To compile uploaded sources, on oberon command window 
+type this and then middle click "ORP.Compile"
 
     ORP.Compile RandomNumbers.Mod/s
     ORP.Compile ObTris.Mod/s
 
-Start Tetris with typing and middle clinking on:
+Start Tetris with typing and middle cliking on:
 
     ObTris.Open
 
+Then middle click to "ObTris.Start"
+Commands:
+
+    J - Left
+    K - Right
+    I - Rotate
+    H - Drop
