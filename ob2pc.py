@@ -25,6 +25,6 @@ if response[0]==0x10:
       break
   f.close()
   print("")
-  print("download ok")
+  print("download done")
 else:
   print("hdr error")

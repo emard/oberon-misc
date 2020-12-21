@@ -32,6 +32,6 @@ if response[0]==16:
     if len(buf)<255:
       break
   print("")
-  print("upload ok")
+  print("upload done")
 else:
   print("hdr error")
