@@ -17,19 +17,23 @@ On oberon, middle click to "PCLink1.Run" to start file transfer service.
 Some LEDs should turn ON during upload and text printed "receiving ObTris.Mod done"
 
     ../pc2ob.py RandomNumbers.Mod /dev/ttyUSB0
-    hdr ok
-    ....
+    uploading RandomNumbers.Mod
     upload ok
 
     ../pc2ob.py ObTris.Mod /dev/ttyUSB0
-    hdr ok
-    .....................................................................................
+    uploading RandomNumbers.Mod
     upload ok
 
 On oberon, check files by typing this and middle clicking to
 "System.Directory":
 
     System.Directory *.Mod
+
+We can also download it back to PC
+
+    ../ob2pc.py /dev/ttyUSB0 ObTris.Mod
+    downloading ObTris.Mod
+    download ok
 
 To compile uploaded sources, on oberon command window 
 type this and then middle click "ORP.Compile"
