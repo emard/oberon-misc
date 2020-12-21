@@ -1,4 +1,4 @@
-# Oberon python tools
+# Oberon PCLink1 python tools
 
 This is small python example for linux which
 uploads files to oberon using PCLink1 protocol via
