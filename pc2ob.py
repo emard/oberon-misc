@@ -14,21 +14,23 @@ response=bytearray(1)
 pclink1.write(header)
 pclink1.readinto(response)
 if response[0]==16:
-  print("hdr ok")
-  remain=length
-  while remain>0:
+  print("uploading",filename)
+  total=0
+  while total<length:
     buf=f.read(255)
     pclink1.write(bytearray([len(buf)]))
     pclink1.write(buf)
     pclink1.readinto(response)
+    total+=len(buf)
     if response[0]==16:
-      print("%6d" % remain,end="\r")
+      print("%9d" % total,end="\r")
       sys.stdout.flush() # make "." appear immediately
     else:
       print("")
       print("blk",len(buf),"error")
       break
-    remain-=len(buf)
+    if len(buf)<255:
+      break
   print("")
   print("upload ok")
 else:
