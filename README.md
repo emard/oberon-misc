@@ -8,8 +8,8 @@ serial port at 19200 baud.
 
 Here is example source: a tetris game by Ralf Denger, adapted by jr.
 
-Oberon needs source files with CR line ending, here's shell script
-that does the conversion:
+Oberon can work with CRLF or CR line ending. Here are shell scripts
+to convert between unix LF line ending and oberon CR line ending:
 
     cd tetris
     ../txt2ob.sh RandomNumbers.Mod.txt RandomNumbers.Mod
