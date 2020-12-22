@@ -43,6 +43,14 @@ type this and then middle click "ORP.Compile"
     ORP.Compile RandomNumbers.Mod/s
     ORP.Compile ObTris.Mod/s
 
+Errors? To edit a file, right-select file name
+and middle-click at "Edit.Open". To locate reporeted
+compiler error
+
+    1) left-click in the source file to set the cursor somewhere
+    2) right-select the pos line of the compiler error
+    3) middle-click on Edit.Locate
+
 Start Tetris with typing and middle cliking on:
 
     ObTris.Open
