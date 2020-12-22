@@ -11,7 +11,7 @@ Here is example source: a tetris game by Ralf Denger, adapted by jr.
 Oberon needs source files with CR line ending, here's shell script
 that does the conversion:
 
-    cd oberon_tetris
+    cd tetris
     ../txt2ob.sh RandomNumbers.Mod.txt RandomNumbers.Mod
     ../txt2ob.sh ObTris.Mod.txt ObTris.Mod
 
