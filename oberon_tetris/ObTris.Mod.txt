@@ -48,10 +48,57 @@ VAR
 	ScoreFile: Files.File;
 	ScoreRider: Files.Rider;
 	ch: ARRAY 7 OF CHAR;
+	nBag, nPiece: INTEGER; (* Current bag to draw next piece from *)
+	Bag: ARRAY 2 OF ARRAY 7 OF INTEGER;
 
 (* Generate Random Numbers *)
 PROCEDURE Random(Ein: INTEGER): INTEGER;
 	RETURN RandomNumbers.RND(Ein) END Random;
+
+(* Shuffle Fair Randomizer Bag *)
+PROCEDURE ShuffleBag();
+	VAR i, j, b, x: INTEGER;
+BEGIN
+	i := Random(7);
+        j := Random(7);
+        b := (nBag+1) MOD 2;
+	x := Bag[b, i];
+	Bag[b, i] := Bag[b, j];
+	Bag[b, j] := x;
+END ShuffleBag;
+
+(* Initialize Fair Randomizer Bag *)
+PROCEDURE InitBag();
+	VAR i, j: INTEGER;
+BEGIN
+	FOR i:=0 TO 1 DO
+		FOR j:=0 TO 6 DO
+			Bag[i,j] := j;
+		END;
+        END;
+	FOR i:=0 TO 20 DO
+		nBag := 1;
+		ShuffleBag();
+		nBag := 0;
+		ShuffleBag();
+	END;
+	nPiece := 0;
+END InitBag;
+
+(* Get Piece from Fair Randomizer Bag *)
+PROCEDURE GetBag(): INTEGER;
+	VAR i, piece: INTEGER;
+BEGIN
+	piece := Bag[nBag, nPiece];
+	FOR i:=0 TO 6 DO
+		ShuffleBag();
+	END;
+	nPiece := (nPiece+1) MOD 7;
+	IF nPiece = 0 THEN
+		nBag := (nBag+1) MOD 2;
+        END;
+	RETURN piece
+END GetBag;
 
 (* Print current Keys *)
 PROCEDURE PrintKeys();
@@ -95,7 +142,7 @@ BEGIN
 		Files.Register(ScoreFile)
 	ELSE
 	 	Files.Close(ScoreFile)
-	 END
+	END
 END SaveHi;
 
 (* Load HiScore *)
@@ -539,7 +586,7 @@ BEGIN
 		ELSE
 			RegisterFig(f.G, x, y, fig, p);
 			KillLines(f);
-			y:=YAnzahl-2; p:=0; fig:=next; next:=Random(7); x:=((XAnzahl-FigSize[fig]) DIV 2)+1;
+			y:=YAnzahl-2; p:=0; fig:=next; next:=GetBag(); x:=((XAnzahl-FigSize[fig]) DIV 2)+1;
 			IF fig=1 THEN DEC(y); p:=2; END;
 			IF ~TestFig(f.G, x, y, fig, p) THEN f.G.Runs:=FALSE; done := TRUE
 			ELSE
@@ -618,7 +665,9 @@ BEGIN
 	IF g.Aktiv THEN
 		g.G.Delay:=Delay;
 		ClearField(g.G);
-		g.G.y:=YAnzahl-2; g.G.p:=0; g.G.fig:=Random(7); g.G.next:=Random(7);
+		InitBag();
+		g.G.y:=YAnzahl-2; g.G.p:=0;
+		g.G.fig:=GetBag(); g.G.next:=GetBag();
 		g.G.Lines:=0; g.G.Score:=0; g.G.Level:=0; g.G.x:=((XAnzahl-FigSize[g.G.fig]) DIV 2)+1;
 		IF g.G.fig=1 THEN DEC(g.G.y); g.G.p:=2; END;
 		msg.G:=g.G; Viewers.Broadcast(msg);
@@ -657,7 +706,8 @@ BEGIN
 		g := f(Frame);
 		IF g.Aktiv THEN
 			IF g.G.Runs THEN GameLoop(g)
-			ELSE					StartNewGame(g)
+			ELSE
+				StartNewGame(g)
 			END
 		END
 	END
