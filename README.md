@@ -23,7 +23,7 @@ Some LEDs should turn ON during upload and text printed "receiving ObTris.Mod do
     upload ok
 
     ../pc2ob.py ObTris.Mod /dev/ttyUSB0
-    uploading RandomNumbers.Mod
+    uploading ObTris.Mod
     upload ok
 
 On oberon, check files by typing this and middle clicking to
