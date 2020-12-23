@@ -38,10 +38,12 @@ We can also download it back to PC
     download ok
 
 To compile uploaded sources, on oberon command window 
-type this and then middle click "ORP.Compile"
+type this and then middle click "ORP.Compile". Ending
+with tilde "~" terminates the command otherwise it would
+proceed with next line.
 
-    ORP.Compile RandomNumbers.Mod/s
-    ORP.Compile ObTris.Mod/s
+    ORP.Compile RandomNumbers.Mod/s ~
+    ORP.Compile ObTris.Mod/s ~
 
 Errors? To edit a file, right-select file name
 and middle-click at "Edit.Open". To locate reporeted
