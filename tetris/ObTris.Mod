@@ -51,10 +51,16 @@ VAR
 	ch: ARRAY 7 OF CHAR;
 	nBag, nPiece: INTEGER; (* Current bag to draw next piece from *)
 	Bag: ARRAY 2 OF ARRAY 7 OF INTEGER;
+	Rnd: INTEGER;
 
-(* Generate Random Numbers *)
-PROCEDURE Random(Ein: INTEGER): INTEGER;
-	RETURN RandomNumbers.RND(Ein) END Random;
+(* Park-Miller 1993 *)
+(* https://en.wikipedia.org/wiki/Lehmer_random_number_generator Sinclair ZX81 *)
+PROCEDURE Random(): INTEGER;
+BEGIN
+	IF Rnd = 0 THEN Rnd := 1; END; (* prevents stall *)
+	Rnd := (Rnd * 75) MOD 65537;
+	RETURN Rnd
+END Random;
 
 (* Shuffle Fair Randomizer Bag *)
 PROCEDURE ShuffleBag();
@@ -64,9 +70,9 @@ BEGIN
 	(* loop to prevent same piece twice when changing bags *)
 	REPEAT
 		REPEAT
-			i := Random(7);
-			j := Random(7);
-		UNTIL i#j; (* prevent nop *)
+			i := Random() MOD 7;
+			j := Random() MOD 7;
+		UNTIL i#j; (* prevent NOP *)
 		IF j=0 THEN (* swap if j=0 -> then i=0 *)
 			j := i;
 			i := 0;
@@ -102,7 +108,7 @@ PROCEDURE GetBag(): INTEGER;
 	VAR i, piece: INTEGER;
 BEGIN
 	piece := Bag[nBag, nPiece];
-	FOR i:=0 TO 6 DO
+	FOR i:=0 TO 1 DO
 		ShuffleBag();
 	END;
 	nPiece := (nPiece+1) MOD 7;
