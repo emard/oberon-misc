@@ -3,7 +3,7 @@ MODULE ObTris; (* V1.0 (C) 1 Nov 1995 by Ralf Degner, E-Mail: degner@pallas.amp.
 (* jr/21dec20: adapted to Oberon-07 and PO2013 *)
 (* emard/22dec20: fair randomizer *)
 
-IMPORT Files, Input, Display, Viewers, Texts, Oberon, MenuViewers, TextFrames, RandomNumbers;
+IMPORT Files, Input, Display, Viewers, Texts, Oberon, MenuViewers, TextFrames;
 
 CONST
 	red=1; blue=3; green=2; yellow=5; col1=4; col2=6; col3=7;
