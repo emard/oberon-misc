@@ -27,4 +27,4 @@ if response[0]==0x10:
   print("")
   print("download done")
 else:
-  print("hdr error")
+  print("hdr error, middle-click PCLink1.Run")

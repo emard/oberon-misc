@@ -34,4 +34,4 @@ if response[0]==16:
   print("")
   print("upload done")
 else:
-  print("hdr error")
+  print("hdr error, middle-click PCLink1.Run")
