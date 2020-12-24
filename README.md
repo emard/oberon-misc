@@ -12,15 +12,10 @@ Oberon can work with CRLF or CR line ending. Here are shell scripts
 to convert between unix LF line ending and oberon CR line ending:
 
     cd tetris
-    ../txt2ob.sh RandomNumbers.Mod.txt RandomNumbers.Mod
-    ../txt2ob.sh ObTris.Mod.txt ObTris.Mod
+    ../txt2ob.sh File.Mod.txt File.Mod
 
 On oberon, middle click to "PCLink1.Run" to start file transfer service.
 Some LEDs should turn ON during upload and text printed "receiving ObTris.Mod done"
-
-    ../pc2ob.py RandomNumbers.Mod /dev/ttyUSB0
-    uploading RandomNumbers.Mod
-    upload ok
 
     ../pc2ob.py ObTris.Mod /dev/ttyUSB0
     uploading ObTris.Mod
@@ -38,11 +33,12 @@ We can also download it back to PC
     download ok
 
 To compile uploaded sources, on oberon command window 
-type this and then middle click "ORP.Compile". Ending
-with tilde "~" terminates the command otherwise it would
+type this and then middle click "System.Free" then "ORP.Compile".
+System.Free unloads from memory previous version if it exists.
+Ending with tilde "~" terminates the command otherwise it would
 proceed with next line.
 
-    ORP.Compile RandomNumbers.Mod/s ~
+    System.Free ObTris ~
     ORP.Compile ObTris.Mod/s ~
 
 Errors? To edit a file, right-select file name
