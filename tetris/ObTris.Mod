@@ -7,7 +7,7 @@ IMPORT Files, Input, Display, Viewers, Texts, Oberon, MenuViewers, TextFrames;
 
 CONST
 	red=1; blue=3; green=2; yellow=5; col1=4; col2=6; col3=7;
-	Menu = "System.Close  System.Copy  System.Grow  ObTris.Start  ObTris.ShowNext  ObTris.Score";
+	Menu = "System.Close  System.Grow  ObTris.ShowNext  ObTris.Score  ObTris.Start";
 	XAnzahl=10; YAnzahl=24; MinKasten=4;
 	UntenOffset=10; ObenOffset=4; SeitenOffset=10; NextXPos=-5; NextYPos=YAnzahl DIV 2;
 	LinesProLevel=10; SpeedUpProLevel=20; ScoreFakt=10; ScoreFileMark=06C6F6976H;
@@ -57,8 +57,8 @@ VAR
 (* https://en.wikipedia.org/wiki/Lehmer_random_number_generator Sinclair ZX81 *)
 PROCEDURE Random(): INTEGER;
 BEGIN
-	IF Rnd = 0 THEN Rnd := 1; END; (* prevents stall *)
-	Rnd := (Rnd * 75) MOD 65537;
+	IF Rnd = 0 THEN Rnd := 1; END; (* prevents constant 0 *)
+	Rnd := (Rnd * 48271) MOD 524287;
 	RETURN Rnd
 END Random;
 
@@ -731,7 +731,7 @@ BEGIN
 	END
 END Start;
 
-(* Restart Game or Start New *)
+(* Show/Hide Next Piece *)
 PROCEDURE ShowNext*();
 	VAR
 		f: Display.Frame; g: Frame;
