@@ -1,6 +1,7 @@
 MODULE ObTris; (* V1.0 (C) 1 Nov 1995 by Ralf Degner, E-Mail: degner@pallas.amp.uni-hannover.de *)
 
 (* jr/21dec20: adapted to Oberon-07 and PO2013 *)
+(* emard/22dec20: fair randomizer *)
 
 IMPORT Files, Input, Display, Viewers, Texts, Oberon, MenuViewers, TextFrames, RandomNumbers;
 
