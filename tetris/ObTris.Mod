@@ -56,9 +56,12 @@ VAR
 (* Park-Miller 1993 *)
 (* https://en.wikipedia.org/wiki/Lehmer_random_number_generator Sinclair ZX81 *)
 PROCEDURE Random(): INTEGER;
+	CONST a = 48271; m = 7FFFFFFFH; q = m DIV a; r = m MOD a;
 BEGIN
 	IF Rnd = 0 THEN Rnd := 1; END; (* prevents constant 0 *)
-	Rnd := (Rnd * 48271) MOD 524287;
+	(* Rnd = a * Rnd MOD m   by Schrage's method *)
+        Rnd := a*(Rnd MOD q) - r*(Rnd DIV q);
+	IF Rnd < 0 THEN INC(Rnd, m) END;
 	RETURN Rnd
 END Random;
 
